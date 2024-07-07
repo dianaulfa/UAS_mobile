@@ -1,94 +1,172 @@
+import {
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  Image,
+  TouchableOpacity,
+  Alert,
+} from 'react-native';
 import React from 'react';
-import { StyleSheet, Text, View, Image, ScrollView, TouchableOpacity } from 'react-native';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { useNavigation } from '@react-navigation/native';
 
-const Home = () => {
+const Index = () => {
+  const navigation = useNavigation();
+
+  const handleLogout = () => {
+    Alert.alert(
+      'Konfirmasi Keluar',
+      'Apakah Anda yakin ingin keluar?',
+      [
+        {
+          text: 'Batal',
+          style: 'cancel',
+        },
+        {
+          text: 'Keluar',
+          onPress: () => {
+            // Navigasi ke halaman beranda
+            navigation.navigate('Beranda');
+          },
+          style: 'destructive',
+        },
+      ],
+      { cancelable: false }
+    );
+  };
+
   return (
     <ScrollView style={styles.container}>
-      <View style={styles.header}>
-        <View style={styles.profileContainer}>
-          <Image source={{ uri: 'https://via.placeholder.com/150' }} style={styles.profileImage} />
-          <View style={styles.profileDetails}>
-            <Text style={styles.profileName}>Diana Ulfa</Text>
-            <Text style={styles.profilePhone}>dianaulfa@gmail.com</Text>
-          </View>
+      <View style={styles.containerProfil}>
+        <View style={styles.containerImage}>
+          <Image
+            source={{
+              uri: 'https://qph.cf2.quoracdn.net/main-qimg-a80f3491ad8b891a98187748d6811a0d-pjlq',
+            }}
+            style={styles.profilePicture}
+          />
         </View>
+        <Text style={styles.textNama}>dianaaa</Text>
+        <Text style={styles.textNomor}>diana@gmail.com</Text>
       </View>
-      
-      <View style={styles.menu}>
-        <MenuItem icon="🔄" title="Transaksi" count="0" />
-        <MenuItem icon="🔔" title="Pemberitahuan" />
-        <MenuItem icon="❤" title="Produk Favorit" count="0" />
-        <MenuItem icon="📍" title="Alamat Pengiriman" count="0" />
-        <MenuItem icon="👥" title="Downline" />
-        <MenuItem icon="📂" title="Transaksi Massal" />
-        <MenuItem icon="⚙" title="Pengaturan" />
-      </View>
+
+      <TouchableOpacity style={styles.conMenu}>
+        <View style={styles.Menu}>
+          <View>
+            <MaterialCommunityIcons name="bell" size={30} color="black" />
+          </View>
+          <Text style={styles.textMenu}>Pemberitahuan</Text>
+        </View>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.conMenu}>
+        <View style={styles.Menu}>
+          <View>
+            <MaterialCommunityIcons name="heart" size={30} color="#000" />
+          </View>
+          <Text style={styles.textMenu}>Produk Favorit</Text>
+        </View>
+        <Text style={styles.nomorMenu}>0</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.conMenu}>
+        <View style={styles.Menu}>
+          <View>
+            <MaterialCommunityIcons name="map-marker" size={30} color="#000" />
+          </View>
+          <Text style={styles.textMenu}>Alamat Pengiriman</Text>
+        </View>
+        <Text style={styles.nomorMenu}>0</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.conMenu}>
+        <View style={styles.Menu}>
+          <View>
+            <MaterialCommunityIcons name="cog" size={30} color="#000" />
+          </View>
+          <Text style={styles.textMenu}>Pengaturan</Text>
+        </View>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.conMenu} onPress={handleLogout}>
+        <View style={styles.Menu}>
+          <View>
+            <MaterialCommunityIcons
+              name="arrow-right-bold-box-outline"
+              size={30}
+              color="#000"
+            />
+          </View>
+          <Text style={styles.textMenu}>Keluar</Text>
+        </View>
+      </TouchableOpacity>
+      <View style={styles.conEnd}></View>
     </ScrollView>
   );
 };
 
-const MenuItem = ({ icon, title, count }) => (
-  <TouchableOpacity style={styles.menuItem}>
-    <Text style={styles.menuIcon}>{icon}</Text>
-    <Text style={styles.menuTitle}>{title}</Text>
-    {count && <Text style={styles.menuCount}>{count}</Text>}
-  </TouchableOpacity>
-);
-
-export default Home;
+export default Index;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: '#3498db',
   },
-  header: {
-    backgroundColor: '#007bff',
-    padding: 20,
-  },
-  profileContainer: {
-    flexDirection: 'row',
+  containerProfil: {
+    width: '100%',
+    height: 200,
+    backgroundColor: 'white',
+    justifyContent: 'center',
+    alignContent: 'center',
     alignItems: 'center',
   },
-  profileImage: {
+  containerImage: {
     width: 60,
     height: 60,
-    borderRadius: 30,
-    marginRight: 15,
-  },
-  profileDetails: {
+    backgroundColor: 'white',
+    borderRadius: 50,
+    top: -20,
+    alignItems: 'center',
     justifyContent: 'center',
   },
-  profileName: {
-    color: '#fff',
+  profilePicture: {
+    width: 40,
+    height: 40,
+    left: 3,
+  },
+  textNama: {
+    padding: 5,
+    top: -15,
     fontSize: 20,
-    fontWeight: 'bold',
+    color: 'black',
   },
-  profilePhone: {
-    color: '#fff',
-    fontSize: 16,
+  textNomor: {
+    top: -15,
+    color: 'black',
   },
-  menu: {
-    marginTop: 20,
+
+  conMenu: {
+    paddingHorizontal: 20,
+    paddingTop: 20,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
-  menuItem: {
+  Menu: {
     flexDirection: 'row',
     alignItems: 'center',
-    padding: 15,
-    backgroundColor: '#fff',
-    marginBottom: 1,
   },
-  menuIcon: {
-    fontSize: 20,
-    marginRight: 15,
+  textIcon: {
+    marginHorizontal: 10,
   },
-  menuTitle: {
-    color:'black',
-    fontSize: 18,
-    flex: 1,
+  textMenu: {
+    marginHorizontal: 15,
+    fontWeight: 'bold',
+    fontSize: 15,
   },
-  menuCount: {
-    fontSize: 18,
-    color: '#007bff',
+  nomorMenu: {
+    fontSize: 15,
+  },
+
+  conEnd: {
+    width: 100,
+    height: 100,
   },
 });

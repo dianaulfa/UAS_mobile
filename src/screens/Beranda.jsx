@@ -1,53 +1,38 @@
 import React from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Image } from 'react-native';
-import { Card } from 'react-native-elements'; // Import Card component from react-native-elements
 
 const Beranda = () => {
+  // Data untuk layanan laundry
+  const services = [
+    { id: 1, name: 'Cuci Satuan', price: 'Rp10.000/item' },
+    { id: 2, name: 'Cuci Kiloan', price: 'Rp5.000/kg' },
+    { id: 3, name: 'Setrika', price: 'Rp3.000/kg' },
+    { id: 4, name: 'Paket Hemat', price: 'Rp25.000/paket' },
+    { id: 5, name: 'Paket Premium', price: 'Rp50.000/paket' },
+    { id: 6, name: 'Layanan Antarkan', price: 'Rp15.000/trip' },
+    { id: 7, name: 'Layanan Ambil', price: 'Rp15.000/trip' },
+  ];
+
   return (
     <ScrollView style={styles.container}>
-
       <View style={styles.conImage}>
-      <Image 
-        source={{uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPjS8oneQh43bkV9RMNBeJn7e2WUutsIlkLg&s'}}
-        style={styles.profileImage}
-      />
+        <Image 
+          source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPjS8oneQh43bkV9RMNBeJn7e2WUutsIlkLg&s' }}
+          style={styles.profileImage}
+        />
       </View>
 
       <View style={styles.header}>
-        <Text style={styles.headerText}>Beranda</Text>
+        <Text style={styles.headerText}>SELAMAT DATANG DI TOKO LAUNDRY</Text>
       </View>
 
       <View style={styles.cardContainer}>
-        <TouchableOpacity style={styles.card}>
-          <Text style={styles.cardText}>Cuci Satuan</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.card}>
-          <Text style={styles.cardText}>Cuci Kiloan</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.card}>
-          <Text style={styles.cardText}>Setrika</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.card}>
-          <Text style={styles.cardText}>Paket Hemat</Text>
-        </TouchableOpacity>
-      </View>
-      
-      {/* Example of another section with different cards */}
-      <View style={styles.cardContainer}>
-        <TouchableOpacity style={styles.card}>
-          <Text style={styles.cardText}>Paket Premium</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.card}>
-          <Text style={styles.cardText}>Layanan Antarkan</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.card}>
-          <Text style={styles.cardText}>Layanan Ambil</Text>
-        </TouchableOpacity>
+        {services.map(service => (
+          <TouchableOpacity key={service.id} style={styles.card}>
+            <Text style={styles.cardText}>{service.name}</Text>
+            <Text style={styles.cardPrice}>{service.price}</Text>
+          </TouchableOpacity>
+        ))}
       </View>
     </ScrollView>
   );
@@ -56,7 +41,7 @@ const Beranda = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: 'yellow',
   },
   header: {
     backgroundColor: '#3498db',
@@ -97,15 +82,20 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     color: '#2c3e50',
+    marginBottom: 5,
   },
-  conImage:{
-    width:'100%',
-    height:200
+  cardPrice: {
+    fontSize: 16,
+    color: '#2c3e50',
   },
-  profileImage:{
-    width:'100%',
-    height:'100%'
-  }
+  conImage: {
+    width: '100%',
+    height: 200,
+  },
+  profileImage: {
+    width: '100%',
+    height: '100%',
+  },
 });
 
-export default Beranda;
+export default Beranda;
